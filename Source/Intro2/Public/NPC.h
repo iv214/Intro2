@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AbilitySystemInterface.h"
+#include "BaseAttributeSet.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "NPC.generated.h"
@@ -29,16 +30,27 @@ class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 	UInputAction* LookAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
+	class UAbilitySystemComponent* AbilitySystemComponent;
 
-	
+	UPROPERTY()
+	UBaseAttributeSet* AttributeSet;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TSubclassOf<class UGameplayEffect> DefaultAttributes;
 
 public:
 	ANPC();
 
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+	UFUNCTION(BlueprintCallable)
+		virtual float GetHealth() const;
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void ChangeHealth(float Value);
+
 protected:
 	void Move(FVector2D MovementVector);
-	// void Look(const FInputActionValue& Value);
 
 	virtual void BeginPlay() override;
 
@@ -46,11 +58,4 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	//~ Begin IAbilitySystemInterface
-	/** Returns our Ability System Component. */
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-	//~ End IAbilitySystemInterface
-	
-
 };

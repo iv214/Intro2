@@ -21,3 +21,7 @@ void UBaseAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffectMo
 		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
 	}
 }
+void UBaseAttributeSet::ChangeHealth(float Value)
+{
+    SetHealth(FMath::Clamp(GetHealth() + Value, 0.f, GetMaxHealth()));
+}

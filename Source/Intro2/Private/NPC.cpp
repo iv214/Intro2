@@ -100,17 +100,20 @@ void ANPC::Move(FVector2D MovementVector)
 	}
 }
 
-/*void ANPC::Look(FVector2D LookAxisVector)
-{
-
-	if (Controller != nullptr)
-	{
-		// add yaw and pitch input to controller
-		AddControllerYawInput(LookAxisVector.X);
-		AddControllerPitchInput(LookAxisVector.Y);
-	}
-}*/
-
 UAbilitySystemComponent* ANPC::GetAbilitySystemComponent() const {
 	return ANPC::AbilitySystemComponent;
+}
+
+float ANPC::GetHealth() const
+{
+	if (AttributeSet) {
+		return AttributeSet->GetHealth();
+	}
+	return -1.0f;
+}
+void ANPC::ChangeHealth(float Value)
+{
+	if (AttributeSet) {
+		AttributeSet->ChangeHealth(Value);
+	}
 }
