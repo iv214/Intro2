@@ -1,0 +1,21 @@
+{
+    "configurations": [
+        {
+            "name": "Intro2Editor Editor Win64 Development (Intro2)",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2.json"
+        },
+        {
+            "name": "Win32",
+            "compilerPath": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+            "cStandard": "c17",
+            "cppStandard": "c++20",
+            "intelliSenseMode": "msvc-x64",
+            "compileCommands": "D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default.json"
+        }
+    ],
+    "version": 4
+}
