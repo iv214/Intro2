@@ -54,5 +54,37 @@
 			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2\\Intro2.1.rsp"
 		],
 		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\GameAIController.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\NPC.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\GameAIController.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\NPC.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Intro2\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
 	}
 ]
