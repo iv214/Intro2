@@ -6,9 +6,7 @@
 #include "AIController.h"
 #include "GameAIController.generated.h"
 
-/**
- * 
- */
+
 UCLASS()
 class INTRO2_API AGameAIController : public AAIController
 {
