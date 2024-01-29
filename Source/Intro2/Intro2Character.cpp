@@ -128,3 +128,7 @@ void AIntro2Character::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+UAbilitySystemComponent* AIntro2Character::GetAbilitySystemComponent() const {
+	return AIntro2Character::AbilitySystemComponent;
+}

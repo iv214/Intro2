@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "AbilitySystemInterface.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
@@ -16,7 +17,7 @@ struct FInputActionValue;
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
 UCLASS(config=Game)
-class AIntro2Character : public ACharacter
+class AIntro2Character : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -44,6 +45,9 @@ class AIntro2Character : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
+	UAbilitySystemComponent* AbilitySystemComponent;
+
 public:
 	AIntro2Character();
 	
@@ -69,5 +73,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 

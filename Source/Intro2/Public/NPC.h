@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "AbilitySystemInterface.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "NPC.generated.h"
@@ -11,7 +12,7 @@ class UInputAction;
 struct FInputActionValue;
 
 UCLASS(config=Game)
-class INTRO2_API ANPC : public ACharacter
+class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -27,6 +28,11 @@ class INTRO2_API ANPC : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
+	UAbilitySystemComponent* AbilitySystemComponent;
+
+	
+
 public:
 	ANPC();
 
@@ -40,5 +46,11 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	//~ Begin IAbilitySystemInterface
+	/** Returns our Ability System Component. */
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	//~ End IAbilitySystemInterface
+	
 
 };

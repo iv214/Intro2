@@ -110,3 +110,7 @@ void ANPC::Move(FVector2D MovementVector)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }*/
+
+UAbilitySystemComponent* ANPC::GetAbilitySystemComponent() const {
+	return ANPC::AbilitySystemComponent;
+}
