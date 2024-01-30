@@ -6,11 +6,16 @@
 #include "BaseAttributeSet.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameCharacterUI.h"
+#include "Components/WidgetComponent.h"
 #include "NPC.generated.h"
 
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+
+class UGameCharacterUI;
+class UWidgetComponent;
 
 UCLASS(config=Game)
 class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
@@ -40,6 +45,12 @@ class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 
 public:
 	ANPC();
+
+	UPROPERTY(EditAnywhere, meta = (BindWidget, BlueprintSpawnableComponent))
+	class UGameCharacterUI* NPC_UI;
+
+	UPROPERTY(EditAnywhere, meta = (BindWidget, BlueprintSpawnableComponent))
+	class UWidgetComponent* NPC_UIC;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 
