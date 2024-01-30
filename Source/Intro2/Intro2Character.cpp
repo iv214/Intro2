@@ -4,6 +4,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "GameCharacterUI.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/Controller.h"
@@ -20,7 +21,23 @@ AIntro2Character::AIntro2Character()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
+	
+
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("NPCAbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("BaseAttributeSet");
+
+	Player_UIC = CreateDefaultSubobject<UWidgetComponent>("NPCWidgetComponent");
+	Player_UIC->SetupAttachment(RootComponent);
+	Player_UIC->SetWidgetSpace(EWidgetSpace::Screen);
+	Player_UIC->SetRelativeLocation(FVector(0, 0, 120));
+	
+	static ConstructorHelpers::FClassFinder<UUserWidget> WidgetHelper{TEXT("/Game/UI/BP_GameCharacterUI")};
+	if (WidgetHelper.Succeeded())
+	{
+		Player_UIC->SetWidgetClass(WidgetHelper.Class);
+	}
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -66,6 +83,25 @@ void AIntro2Character::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+	SetHealth(95.0f);
+}
+
+// Called every frame
+void AIntro2Character::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	float health = GetHealth();
+	float maxHealth = GetMaxHealth();
+	// UE_LOG(LogTemp, Warning, TEXT("Player Health is %f/%f.\n"), health, maxHealth);
+
+	if (auto const widget = Cast<UGameCharacterUI>(Player_UIC->GetUserWidgetObject()))
+	{
+		widget->SetHealthPercent(health/maxHealth);
+	}
+	else
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("SetHealthPercent Error."));
 	}
 }
 
@@ -129,6 +165,42 @@ void AIntro2Character::Look(const FInputActionValue& Value)
 	}
 }
 
-UAbilitySystemComponent* AIntro2Character::GetAbilitySystemComponent() const {
+UAbilitySystemComponent* AIntro2Character::GetAbilitySystemComponent() const
+{
 	return AIntro2Character::AbilitySystemComponent;
+}
+
+float AIntro2Character::GetMaxHealth() const
+{
+	if (AbilitySystemComponent) {
+		return AbilitySystemComponent->GetNumericAttribute(UBaseAttributeSet::GetMaxHealthAttribute());
+	}
+	return -1.0f;
+}
+void AIntro2Character::SetMaxHealth(float Value)
+{
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->SetNumericAttributeBase(UBaseAttributeSet::GetMaxHealthAttribute(), Value);
+	}
+}
+float AIntro2Character::GetHealth() const
+{
+	if (AbilitySystemComponent) {
+		return AbilitySystemComponent->GetNumericAttribute(UBaseAttributeSet::GetHealthAttribute());
+	}
+	return -1.0f;
+}
+void AIntro2Character::SetHealth(float Value)
+{
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->SetNumericAttributeBase(UBaseAttributeSet::GetHealthAttribute(), Value);
+	}
+}
+void AIntro2Character::ChangeHealth(float Value)
+{
+	SetHealth(GetHealth() + Value);
+}
+void AIntro2Character::ChangeMaxHealth(float Value)
+{
+	SetMaxHealth(GetMaxHealth() + Value);
 }

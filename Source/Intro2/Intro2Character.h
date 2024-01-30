@@ -3,9 +3,12 @@
 #pragma once
 
 #include "AbilitySystemInterface.h"
+#include "BaseAttributeSet.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Components/WidgetComponent.h"
+
 #include "Intro2Character.generated.h"
 
 class USpringArmComponent;
@@ -13,6 +16,9 @@ class UCameraComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+
+class UGameCharacterUI;
+class UWidgetComponent;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -48,9 +54,36 @@ class AIntro2Character : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
 	UAbilitySystemComponent* AbilitySystemComponent;
 
+	UPROPERTY(EditAnywhere)
+	UBaseAttributeSet* AttributeSet;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TSubclassOf<class UGameplayEffect> DefaultAttributes;
+
 public:
 	AIntro2Character();
+	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	class UWidgetComponent* Player_UIC;
+
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
+	UFUNCTION(BlueprintCallable)
+		virtual float GetHealth() const;
+
+	UFUNCTION(BlueprintCallable)
+		virtual float GetMaxHealth() const;
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void SetMaxHealth(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void SetHealth(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void ChangeHealth(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void ChangeMaxHealth(float Value);
 
 protected:
 
@@ -69,11 +102,10 @@ protected:
 	virtual void BeginPlay();
 
 public:
+	virtual void Tick(float DeltaTime) override;
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 };
 
