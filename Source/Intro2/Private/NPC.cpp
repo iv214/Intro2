@@ -5,6 +5,7 @@
 #include "Engine/LocalPlayer.h"
 #include "Components/CapsuleComponent.h"
 #include "UObject/ConstructorHelpers.h"
+#include "GameCharacterUI.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "AIController.h"
@@ -19,6 +20,21 @@ ANPC::ANPC()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
+	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("NPCAbilitySystemComponent");
+	AbilitySystemComponent->SetIsReplicated(true);
+	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("BaseAttributeSet");
+
+	NPC_UIC = CreateDefaultSubobject<UWidgetComponent>("NPCWidgetComponent");
+	NPC_UIC->SetupAttachment(RootComponent);
+	NPC_UIC->SetWidgetSpace(EWidgetSpace::Screen);
+	NPC_UIC->SetRelativeLocation(FVector(0, 0, 120));
+	
+	static ConstructorHelpers::FClassFinder<UUserWidget> WidgetHelper{TEXT("/Game/UI/BP_GameCharacterUI")};
+	if (WidgetHelper.Succeeded())
+	{
+		NPC_UIC->SetWidgetClass(WidgetHelper.Class);
+	}
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
 
@@ -44,6 +60,8 @@ void ANPC::BeginPlay()
 {
 	// Call the base class  
 	Super::BeginPlay();
+	
+	SetHealth(75.0);
 	/*
 	//Add Input Mapping Context
 	if (AAIController* NPCController = Cast<AAIController>(Controller))
@@ -61,6 +79,18 @@ void ANPC::BeginPlay()
 void ANPC::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	float health = GetHealth();
+	float maxHealth = GetMaxHealth();
+	// UE_LOG(LogTemp, Warning, TEXT("Health is %f/%f.\n"), health, maxHealth);
+
+	if (auto const widget = Cast<UGameCharacterUI>(NPC_UIC->GetUserWidgetObject()))
+	{
+		widget->SetHealthPercent(health/maxHealth);
+	}
+	else
+	{
+		// UE_LOG(LogTemp, Warning, TEXT("SetHealthPercent Error."));
+	}
 }
 
 // Called to bind functionality to input
@@ -102,20 +132,46 @@ void ANPC::Move(FVector2D MovementVector)
 	}
 }
 
-UAbilitySystemComponent* ANPC::GetAbilitySystemComponent() const {
+UAbilitySystemComponent* ANPC::GetAbilitySystemComponent() const
+{
 	return ANPC::AbilitySystemComponent;
 }
 
-float ANPC::GetHealth() const
+float ANPC::GetMaxHealth() const
 {
-	if (AttributeSet) {
-		return AttributeSet->GetHealth();
+	if (AbilitySystemComponent) {
+		return AbilitySystemComponent->GetNumericAttribute(UBaseAttributeSet::GetMaxHealthAttribute());
 	}
 	return -1.0f;
 }
+void ANPC::SetMaxHealth(float Value)
+{
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->SetNumericAttributeBase(UBaseAttributeSet::GetMaxHealthAttribute(), Value);
+	}
+}
+float ANPC::GetHealth() const
+{
+	if (AbilitySystemComponent) {
+		return AbilitySystemComponent->GetNumericAttribute(UBaseAttributeSet::GetHealthAttribute());
+	}
+	return -1.0f;
+}
+void ANPC::SetHealth(float Value)
+{
+	if (AbilitySystemComponent) {
+		AbilitySystemComponent->SetNumericAttributeBase(UBaseAttributeSet::GetHealthAttribute(), Value);
+	}
+}
 void ANPC::ChangeHealth(float Value)
 {
-	if (AttributeSet) {
-		AttributeSet->ChangeHealth(Value);
-	}
+	SetHealth(GetHealth() + Value);
+}
+void ANPC::ChangeMaxHealth(float Value)
+{
+	SetMaxHealth(GetMaxHealth() + Value);
+}
+UBehaviorTree* ANPC::GetBehaviorTree() const
+{
+	return Tree;
 }

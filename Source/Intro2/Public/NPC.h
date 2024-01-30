@@ -4,9 +4,9 @@
 
 #include "AbilitySystemInterface.h"
 #include "BaseAttributeSet.h"
+#include "BehaviorTree/BehaviorTree.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
-#include "GameCharacterUI.h"
 #include "Components/WidgetComponent.h"
 #include "NPC.generated.h"
 
@@ -37,7 +37,7 @@ class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
 	class UAbilitySystemComponent* AbilitySystemComponent;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	UBaseAttributeSet* AttributeSet;
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
@@ -46,27 +46,41 @@ class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 public:
 	ANPC();
 
-	UPROPERTY(EditAnywhere, meta = (BindWidget, BlueprintSpawnableComponent))
-	class UGameCharacterUI* NPC_UI;
-
-	UPROPERTY(EditAnywhere, meta = (BindWidget, BlueprintSpawnableComponent))
+	UPROPERTY(EditAnywhere, BlueprintReadOnly) //,  meta = (BindWidget, BlueprintSpawnableComponent))
 	class UWidgetComponent* NPC_UIC;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
+	
 	UFUNCTION(BlueprintCallable)
 		virtual float GetHealth() const;
+
+	UFUNCTION(BlueprintCallable)
+		virtual float GetMaxHealth() const;
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void SetMaxHealth(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void SetHealth(float Value);
 	
 	UFUNCTION(BlueprintCallable)
 		virtual void ChangeHealth(float Value);
+	
+	UFUNCTION(BlueprintCallable)
+		virtual void ChangeMaxHealth(float Value);
 
 protected:
 	void Move(FVector2D MovementVector);
 
 	virtual void BeginPlay() override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI", meta = (AllowPrivateAccess = "true"))
+	UBehaviorTree* Tree;
+
 public:	
 	virtual void Tick(float DeltaTime) override;
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	UBehaviorTree* GetBehaviorTree() const;
 };

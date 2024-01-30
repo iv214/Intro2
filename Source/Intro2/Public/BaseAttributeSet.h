@@ -30,6 +30,5 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category = "Health")
 		FGameplayAttributeData Health = 100.0f;
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Health)
-	void ChangeHealth(float Value);
 	
 };
