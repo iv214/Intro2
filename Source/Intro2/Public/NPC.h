@@ -16,6 +16,7 @@ struct FInputActionValue;
 
 class UGameCharacterUI;
 class UWidgetComponent;
+class UGE_Damage;
 
 UCLASS(config=Game)
 class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
@@ -75,7 +76,10 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="AI", meta = (AllowPrivateAccess = "true"))
-	UBehaviorTree* Tree;
+		UBehaviorTree* Tree;
+
+	UFUNCTION(BlueprintCallable, Category = "Effects")
+		void InitEffects();
 
 public:	
 	virtual void Tick(float DeltaTime) override;

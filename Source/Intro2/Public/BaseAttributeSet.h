@@ -23,12 +23,16 @@ public:
 
 	void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Health", Meta = (AllowPrivateAccess = true))
 		FGameplayAttributeData MaxHealth = 100.0f;
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, MaxHealth)
 
-	UPROPERTY(BlueprintReadOnly, Category = "Health")
+	UPROPERTY(BlueprintReadOnly, Category = "Health", Meta = (AllowPrivateAccess = true))
 		FGameplayAttributeData Health = 100.0f;
 	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Health)
+
+	UPROPERTY(BlueprintReadOnly, Category = "Damage", Meta = (AllowPrivateAccess = true))
+		FGameplayAttributeData Attack = 10.0f;
+	ATTRIBUTE_ACCESSORS(UBaseAttributeSet, Attack)
 	
 };

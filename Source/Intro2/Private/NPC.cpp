@@ -12,6 +12,8 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
+// Effects
+#include "GE_Damage.h"
 
 
 // Sets default values
@@ -175,3 +177,4 @@ UBehaviorTree* ANPC::GetBehaviorTree() const
 {
 	return Tree;
 }
+void ANPC::InitEffects() {;}
