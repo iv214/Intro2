@@ -16,4 +16,5 @@ struct INTRO2_API FGEMM_Custom : public FGameplayEffectModifierMagnitude
 	GENERATED_USTRUCT_BODY()
 public:
     FGEMM_Custom();
+    FGEMM_Custom(FName tagName);
 };

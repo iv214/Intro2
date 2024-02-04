@@ -20,7 +20,7 @@ void UGE_Damage::PostInitProperties()
     FGameplayModifierInfo DamageModifier;
     DamageModifier.Attribute = UBaseAttributeSet::GetHealthAttribute();
     DamageModifier.ModifierOp = EGameplayModOp::Additive;
-    FGEMM_Custom FGEMM_Damage;
+    FGEMM_Custom FGEMM_Damage(FName("SetByCaller.DamageMagnitude"));
     DamageModifier.ModifierMagnitude = FGEMM_Damage;
     Modifiers.Empty();
     Modifiers.Add(DamageModifier);

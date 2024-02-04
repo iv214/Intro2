@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AbilitySystemInterface.h"
+#include "BaseAbilitySet.h"
 #include "BaseAttributeSet.h"
 #include "BehaviorTree/BehaviorTree.h"
 #include "CoreMinimal.h"
@@ -38,11 +39,17 @@ class INTRO2_API ANPC : public ACharacter, public IAbilitySystemInterface
 	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
 	class UAbilitySystemComponent* AbilitySystemComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Abilities")
 	UBaseAttributeSet* AttributeSet;
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
-	TSubclassOf<class UGameplayEffect> DefaultAttributes;
+	UBaseAbilitySet* AbilitySet;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	FGameplayEffectSpec GESpec;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TSubclassOf<class UGameplayEffect> DefaultEffect;
 
 public:
 	ANPC();
@@ -79,7 +86,7 @@ protected:
 		UBehaviorTree* Tree;
 
 	UFUNCTION(BlueprintCallable, Category = "Effects")
-		void InitEffects();
+		void InitAbilities();
 
 public:	
 	virtual void Tick(float DeltaTime) override;

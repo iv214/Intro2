@@ -25,7 +25,8 @@ ANPC::ANPC()
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("NPCAbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
-	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("BaseAttributeSet");
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("NPCAttributeSet");
+	AbilitySet = CreateDefaultSubobject<UBaseAbilitySet>("NPCAbilitySet");
 
 	NPC_UIC = CreateDefaultSubobject<UWidgetComponent>("NPCWidgetComponent");
 	NPC_UIC->SetupAttachment(RootComponent);
@@ -63,6 +64,7 @@ void ANPC::BeginPlay()
 	// Call the base class  
 	Super::BeginPlay();
 	
+	InitAbilities();
 	SetHealth(75.0);
 	/*
 	//Add Input Mapping Context
@@ -177,4 +179,14 @@ UBehaviorTree* ANPC::GetBehaviorTree() const
 {
 	return Tree;
 }
-void ANPC::InitEffects() {;}
+void ANPC::InitAbilities() {
+
+	GESpec.SetSetByCallerMagnitude(FGameplayTag::RequestGameplayTag(FName("SetByCaller.DamageMagnitude")), -10.0f);
+	if (IsValid(AbilitySet)) {
+		AbilitySet->GiveAbilities(AbilitySystemComponent);
+	}
+	if (IsValid(DefaultEffect)) {
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultEffect->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
+	}
+	
+}
