@@ -101,6 +101,9 @@ protected:
 	// To add mapping context
 	virtual void BeginPlay();
 
+private:
+	class UAIPerceptionStimuliSourceComponent* StimulusSource;
+	void SetupStimulusSource();
 public:
 	virtual void Tick(float DeltaTime) override;
 	/** Returns CameraBoom subobject **/

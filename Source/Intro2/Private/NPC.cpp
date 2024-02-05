@@ -8,7 +8,7 @@
 #include "GameCharacterUI.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
-#include "AIController.h"
+#include "GameAIController.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "InputActionValue.h"
@@ -22,6 +22,8 @@ ANPC::ANPC()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	
+	AIControllerClass = AGameAIController::StaticClass();
+
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("NPCAbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
@@ -61,9 +63,11 @@ ANPC::ANPC()
 // Called when the game starts or when spawned
 void ANPC::BeginPlay()
 {
-	// Call the base class  
+	// Call the base class
 	Super::BeginPlay();
 	
+
+	SpawnDefaultController();
 	InitAbilities();
 	SetHealth(75.0);
 	/*
