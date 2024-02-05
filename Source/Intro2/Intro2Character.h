@@ -3,6 +3,7 @@
 #pragma once
 
 #include "AbilitySystemInterface.h"
+#include "BaseAbilitySet.h"
 #include "BaseAttributeSet.h"
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
@@ -19,6 +20,7 @@ struct FInputActionValue;
 
 class UGameCharacterUI;
 class UWidgetComponent;
+class UGE_Damage;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -52,13 +54,19 @@ class AIntro2Character : public ACharacter, public IAbilitySystemInterface
 	UInputAction* LookAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = "Abilities")
-	UAbilitySystemComponent* AbilitySystemComponent;
+	class UAbilitySystemComponent* AbilitySystemComponent;
 
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(EditAnywhere, Category = "Abilities")
 	UBaseAttributeSet* AttributeSet;
 
 	UPROPERTY(EditAnywhere, Category = "Abilities")
-	TSubclassOf<class UGameplayEffect> DefaultAttributes;
+	UBaseAbilitySet* AbilitySet;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	FGameplayEffectSpec GESpec;
+
+	UPROPERTY(EditAnywhere, Category = "Abilities")
+	TSubclassOf<class UGameplayEffect> DefaultEffect;
 
 public:
 	AIntro2Character();
@@ -100,6 +108,9 @@ protected:
 	
 	// To add mapping context
 	virtual void BeginPlay();
+
+	UFUNCTION(BlueprintCallable, Category = "Effects")
+		void InitAbilities();
 
 private:
 	class UAIPerceptionStimuliSourceComponent* StimulusSource;

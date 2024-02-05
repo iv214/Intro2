@@ -29,8 +29,9 @@ AIntro2Character::AIntro2Character()
 	AbilitySystemComponent = CreateDefaultSubobject<UAbilitySystemComponent>("NPCAbilitySystemComponent");
 	AbilitySystemComponent->SetIsReplicated(true);
 	AbilitySystemComponent->SetReplicationMode(EGameplayEffectReplicationMode::Full);
-	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("BaseAttributeSet");
-
+	AttributeSet = CreateDefaultSubobject<UBaseAttributeSet>("NPCAttributeSet");
+	AbilitySet = CreateDefaultSubobject<UBaseAbilitySet>("NPCAbilitySet");
+	
 	Player_UIC = CreateDefaultSubobject<UWidgetComponent>("NPCWidgetComponent");
 	Player_UIC->SetupAttachment(RootComponent);
 	Player_UIC->SetWidgetSpace(EWidgetSpace::Screen);
@@ -88,6 +89,7 @@ void AIntro2Character::BeginPlay()
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
 	}
+	InitAbilities();
 	SetHealth(95.0f);
 }
 
@@ -217,4 +219,15 @@ void AIntro2Character::SetupStimulusSource()
 		StimulusSource->RegisterForSense(TSubclassOf<UAISense_Sight>());
 		StimulusSource->RegisterWithPerceptionSystem();
 	}
+}
+void AIntro2Character::InitAbilities() {
+
+	GESpec.SetSetByCallerMagnitude(FGameplayTag::RequestGameplayTag(FName("SetByCaller.DamageMagnitude")), -10.0f);
+	if (IsValid(AbilitySet)) {
+		AbilitySet->GiveAbilities(AbilitySystemComponent);
+	}
+	if (IsValid(DefaultEffect)) {
+		AbilitySystemComponent->ApplyGameplayEffectToSelf(DefaultEffect->GetDefaultObject<UGameplayEffect>(), 0.f, AbilitySystemComponent->MakeEffectContext());
+	}
+	
 }
