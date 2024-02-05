@@ -41,10 +41,10 @@ void AGameAIController::SetupPerceptionSystem() {
     {
         SetPerceptionComponent(*CreateDefaultSubobject<UAIPerceptionComponent>(TEXT("Perception Component")));
         SightConfig->SightRadius = 500.0f;
-        SightConfig->LoseSightRadius = SightConfig->SightRadius + 100.0f;
+        SightConfig->LoseSightRadius = SightConfig->SightRadius + 250.0f;
         SightConfig->PeripheralVisionAngleDegrees = 90.f;
         SightConfig->SetMaxAge(5.f);
-        SightConfig->AutoSuccessRangeFromLastSeenLocation = 75.f;
+        SightConfig->AutoSuccessRangeFromLastSeenLocation = 150.f;
         SightConfig->DetectionByAffiliation.bDetectEnemies = true;
         SightConfig->DetectionByAffiliation.bDetectFriendlies = true;
         SightConfig->DetectionByAffiliation.bDetectNeutrals = true;

@@ -56,6 +56,38 @@
 		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
 	},
 	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\AI_BTTBB_Charge.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\AI_BTTBB_FindTarget.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\AI_BTTBB_Patrol.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\BaseAbilitySet.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
 		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\BaseAttributeSet.cpp",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
@@ -121,6 +153,38 @@
 	},
 	{
 		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Private\\NPC.cpp",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\AI_BTTBB_Charge.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\AI_BTTBB_FindTarget.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\AI_BTTBB_Patrol.h",
+		"arguments": [
+			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
+			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
+		],
+		"directory": "D:\\Games\\Epic Games\\UE_5.3\\Engine\\Source"
+	},
+	{
+		"file": "D:\\dev\\Unreal Projects\\Intro2\\Source\\Intro2\\Public\\BaseAbilitySet.h",
 		"arguments": [
 			"C:\\Program Files (x86)\\Microsoft Visual Studio\\2022\\BuildTools\\VC\\Tools\\MSVC\\14.38.33130\\bin\\Hostx64\\x64\\cl.exe",
 			"@D:\\dev\\Unreal Projects\\Intro2\\.vscode\\compileCommands_Default\\Intro2.1.rsp"
