@@ -21,5 +21,7 @@ class INTRO2_API UGA_Attack : public UGameplayAbility
 		) override;
 	public:
 		UGA_Attack();
-	
+
+		UPROPERTY(BlueprintReadOnly, EditAnywhere)
+		UAnimMontage* LightAttackMontage1;
 };
