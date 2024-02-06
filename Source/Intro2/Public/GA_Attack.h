@@ -6,23 +6,12 @@
 #include "Abilities/GameplayAbility.h"
 #include "GA_Attack.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class INTRO2_API UGA_Attack : public UGameplayAbility
 {
 	GENERATED_BODY()
 
 	protected:
-		virtual bool CanActivateAbility(
-			const FGameplayAbilitySpecHandle Handle,
-			const FGameplayAbilityActorInfo* ActorInfo,
-			const FGameplayTagContainer* SourceTags = nullptr,
-			const FGameplayTagContainer* TargetTags = nullptr,
-			OUT FGameplayTagContainer* OptionalRelevantTags = nullptr
-		) const override;
-
 		virtual void ActivateAbility
 		(
 			const FGameplayAbilitySpecHandle Handle,
